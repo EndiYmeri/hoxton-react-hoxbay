@@ -29,12 +29,15 @@ function Basket({basket, setBasket}){
         }
         return totalPrice.toFixed(2)
     }
+
+    if(basket.lenghth === 0) return  
+
     return(
         <section className="basket-container">
         <h2>Your Basket</h2>
         <ul>
             {
-                basket? basket.map((item,i)=>{
+                basket.length > 0? basket.map((item,i)=>{
                    let  itemCount = Number(item.count)
                    return (
                         <li key={i}>
@@ -89,7 +92,7 @@ function Basket({basket, setBasket}){
                         </li>
                    )
                 
-                }):<h1>No Items</h1>
+                }):<h1>No Items in cart</h1>
             }
         </ul>
       

@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-function Products({itemsToShow ,setItemsToShow}){
+function Search({searchTerm, itemsToShow, setItemsToShow}){
+
+    let newItemsToShow =[]
     
-  useEffect(()=>{
-    fetch('http://localhost:3001/products')
-    .then(resp => resp.json())
-    .then(items => {
-        setItemsToShow(items)
-    })
-  },[])
+    if(itemsToShow){
+        newItemsToShow = itemsToShow.filter((item)=> {
+            if(item.title === searchTerm || item.description === searchTerm){
+                return item
+            }
+        })
+        setItemsToShow(newItemsToShow)        
+    } else{
+        console.log('fuck off')    
+    }
+
+    
 
     return(
             <section className="products-container main-wrapper">
@@ -36,4 +43,4 @@ function Products({itemsToShow ,setItemsToShow}){
             </section>
     )
 }
-export default Products
+export default Search
